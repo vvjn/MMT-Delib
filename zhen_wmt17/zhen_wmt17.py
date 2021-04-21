@@ -23,20 +23,20 @@ from sklearn import datasets
 from sklearn.preprocessing import StandardScaler
 
 # Chinese to English translation datasets.
-LOCATION_OF_DATA = '/experiments/jive/multi30k/'
+LOCATION_OF_DATA = '/home/vipin/m3t/multi30k-vag-nmt/Multi30K_FR/'
 
 _ZHEN_TRAIN_DATASETS = [
-    LOCATION_OF_DATA+'train.en',
-    LOCATION_OF_DATA+'train.fr',
-    LOCATION_OF_DATA+'train.fr',
-    LOCATION_OF_DATA+'train.npy'
+    LOCATION_OF_DATA+'train.norm.tok.lc.10000bpe.en',
+    LOCATION_OF_DATA+'train.norm.tok.lc.10000bpe.fr',
+    LOCATION_OF_DATA+'train.norm.tok.lc.10000bpe.fr',
+    LOCATION_OF_DATA+'train.norm.tok.lc.10000bpe_ims.npy'
 ]
 
 _ZHEN_DEV_DATASETS = [
-    LOCATION_OF_DATA+'val.en',
-    LOCATION_OF_DATA+'val.fr',
-    LOCATION_OF_DATA+'val.fr',
-    LOCATION_OF_DATA+'val.npy'
+    LOCATION_OF_DATA+'val.norm.tok.lc.10000bpe.en',
+    LOCATION_OF_DATA+'val.norm.tok.lc.10000bpe.fr',
+    LOCATION_OF_DATA+'val.norm.tok.lc.10000bpe.fr',
+    LOCATION_OF_DATA+'val.norm.tok.lc.10000bpe_ims.npy'
 ]
 
 
@@ -44,8 +44,8 @@ _ZHEN_STRAIN_DATASETS = [
 ]
 
 _ZHEN_VOCAB_FILES = [
-    LOCATION_OF_DATA+'train_en.dict',
-    LOCATION_OF_DATA+'train_fr.dict'
+    LOCATION_OF_DATA+'train.norm.tok.lc.10000bpe.vocab.en',
+    LOCATION_OF_DATA+'train.norm.tok.lc.10000bpe.vocab.fr'
 ]
 
 
@@ -172,8 +172,8 @@ class DelibZhenWmt17(TranslateProblem):
         #vocab_trg_list = vocab_trg_list[3:self.targeted_vocab_size+1]
     
         # Insert the <UNK>.
-        #vocab_src_list.insert(0, "<UNK>")
-        #vocab_trg_list.insert(0, "<UNK>")    
+        vocab_src_list.insert(0, "<UNK>")
+        vocab_trg_list.insert(0, "<UNK>")    
 
         # Auto-insert the reserved tokens as: <pad>=0 <EOS>=1 and <UNK>=2.
         source_vocab = text_encoder.TokenTextEncoder(vocab_filename=None, vocab_list=vocab_src_list,
